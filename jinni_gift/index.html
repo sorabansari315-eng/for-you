@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Jinni ❤️</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(45deg,#ff758c,#ff7eb3);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+}
+
+/* LOGIN */
+
+#login{
+position:absolute;
+background:black;
+color:white;
+height:100vh;
+width:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:10;
+}
+
+input{
+padding:12px;
+font-size:18px;
+border-radius:10px;
+border:none;
+}
+
+button{
+padding:10px 20px;
+margin-top:20px;
+font-size:18px;
+border:none;
+border-radius:10px;
+background:#ff4b6e;
+color:white;
+cursor:pointer;
+}
+
+/* BOOK */
+
+.book{
+width:350px;
+height:500px;
+position:relative;
+perspective:2000px;
+}
+
+/* PAGE */
+
+.page{
+
+position:absolute;
+width:100%;
+height:100%;
+background:white;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.4);
+
+transform-origin:left;
+transition:transform 1s;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+padding:25px;
+text-align:center;
+
+background-image:linear-gradient(#eee 1px, transparent 1px);
+background-size:100% 28px;
+
+}
+
+/* page order */
+
+.page:nth-child(1){z-index:5}
+.page:nth-child(2){z-index:4}
+.page:nth-child(3){z-index:3}
+.page:nth-child(4){z-index:2}
+.page:nth-child(5){z-index:1}
+
+/* flip */
+
+.page.flipped{
+transform:rotateY(-180deg);
+}
+
+/* IMAGE */
+
+.page img{
+width:220px;
+border-radius:10px;
+}
+
+/* TEXT FIX */
+
+.page p{
+max-width:90%;
+line-height:1.6;
+}
+
+/* HEART */
+
+.loveHeart{
+font-size:80px;
+cursor:pointer;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.2);}
+100%{transform:scale(1);}
+}
+
+/* FLOAT HEARTS */
+
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:22px;
+animation:float 6s linear forwards;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-110vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="login">
+
+<h1>Welcome Jinni ❤️</h1>
+<p>Enter Password</p>
+
+<input id="pass" type="password">
+
+<button onclick="login()">Enter</button>
+
+</div>
+
+
+<div class="book">
+
+<!-- PAGE 1 -->
+
+<div class="page">
+
+<h2>Dear Jinni… 💌</h2>
+
+<p>
+This notebook is the story of us ❤️  
+Har page ek memory hai…  
+Har photo ek feeling hai…  
+Aur last page par ek surprise bhi hai ✨
+</p>
+
+<button onclick="nextPage()">Next ➜</button>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div class="page">
+
+<h4>ME WITH MY RASMALAI 📸</h4>
+
+<img src="https://i.ibb.co/mVLFqNmv/jinni2-jpg.jpg" alt="jinni2 jpg" border="0">
+
+<button onclick="prevPage()">⬅ Previous</button>
+<button onclick="nextPage()">Next ➜</button>
+
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="page">
+
+<h4> CUTE MOMENTS 📸 </h4>
+
+<img src="https://i.ibb.co/G35BG6qD/jinni1-jpg.jpg" alt="jinni1 jpg" border="0">
+
+<button onclick="prevPage()">⬅ Previous</button>
+<button onclick="nextPage()">Next ➜</button>
+
+</div>
+
+<!-- PAGE 4 -->
+
+<div class="page">
+
+<h2>Message 💌</h2>
+
+<p id="typing"></p>
+
+<div id="eidiHeart" style="display:none">
+
+<p>Tap the Heart ❤️</p>
+
+<div class="loveHeart" onclick="nextPage()">❤️</div>
+
+</div>
+
+<button onclick="prevPage()">⬅ Previous</button>
+
+</div>
+
+<!-- PAGE 5 -->
+
+<div class="page">
+
+<h4>Jinni Tumhari Eidi 🎁</h4>
+
+<button onclick="eidi('EK TIGHT HUG 🫂')">EK TIGHT HUG 🫂</button>
+<button onclick="eidi('EK LONG KISS 💏')">EK LONG KISS 💏</button>
+<button onclick="eidi('JINNI KO GODI LENA 👻😁 ')">JINNI KO GODI LENA 👻😁</button>
+<button onclick="eidi('GHUMNE JANA 🧑‍🤝‍🧑 ')">GHUMNE JANA 🧑‍🤝‍🧑</button>
+<button onclick="eidi('LUNCH DATE 🍕🍜 ')">LUNCH DATE 🍕🍜</button>
+<button onclick="eidi('💖😋')">AUR JO JINNI KO CHIYE BABY SE BSS BOLO BABY... 💖😋</button>
+
+<p id="result"></p>
+
+<button onclick="prevPage()">⬅ Previous</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* LOGIN */
+
+function login(){
+
+let p=document.getElementById("pass").value
+
+if(p==="jinni@513"){
+
+document.getElementById("login").style.display="none"
+
+}else{
+
+alert("Wrong password ❤️")
+
+}
+
+}
+
+/* PAGE FLIP */
+
+let current=0
+let pages=document.querySelectorAll(".page")
+
+function nextPage(){
+
+if(current < pages.length){
+
+pages[current].classList.add("flipped")
+current++
+
+if(current===3){
+startTyping()
+}
+
+}
+
+}
+
+function prevPage(){
+
+if(current > 0){
+
+current--
+pages[current].classList.remove("flipped")
+
+}
+
+}
+
+/* TYPING MESSAGE */
+
+let lines=[
+"Welcome Jinni ❤️Yeh choti si website sirf ek baat kehne ke liye hai... tum meri life ki sabse beautiful feeling ho.❤️",
+"Dear Jinni, duniya mein bahut log milte hain… par dil ko sukoon sirf tumse milta hai.✨",
+"Yeh website koi normal page nahi hai… yeh meri feelings ka ek chota sa corner hai.. jo sirf meri Jinni ke liye bana hai..💌💖"
+]
+
+let line=0
+
+function startTyping(){
+
+let box=document.getElementById("typing")
+
+function typeLine(){
+
+if(line < lines.length){
+
+let text=lines[line]
+let i=0
+
+let interval=setInterval(function(){
+
+box.innerHTML += text.charAt(i)
+i++
+
+if(i>=text.length){
+
+clearInterval(interval)
+
+box.innerHTML += "<br><br>"
+
+line++
+
+setTimeout(typeLine,800)
+
+}
+
+},40)
+
+}
+else{
+
+document.getElementById("eidiHeart").style.display="block"
+
+}
+
+}
+
+typeLine()
+
+}
+
+/* EIDI */
+
+function eidi(item){
+
+document.getElementById("result").innerHTML="Eidi Selected: "+item+" ❤️"
+
+}
+
+/* FLOATING HEARTS */
+
+setInterval(function(){
+
+let heart=document.createElement("div")
+
+heart.innerHTML="💖"
+heart.className="heart"
+heart.style.left=Math.random()*100+"vw"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>heart.remove(),6000)
+
+},900)
+
+</script>
+
+</body>
+</html>
+
